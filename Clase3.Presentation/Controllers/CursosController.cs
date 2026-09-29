@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using Clase2.Application.Commands;
 using Clase2.Application.Queries;
-using Clase2.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
+using Clase2.Application.DTOs;
 
 namespace Clase3.Presentation.Controllers;
  
@@ -36,7 +36,7 @@ public sealed class CursosController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    [ProducesResponseType(typeof(Curso), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(CursoDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
     {
