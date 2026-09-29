@@ -1,17 +1,18 @@
 # MDW-Clase2
 
-Academic project for web development: an ASP.NET Core API for managing courses
-and professors, organized into domain, application, infrastructure, and
-presentation projects.
+Proyecto académico de desarrollo web: una API ASP.NET Core para administrar
+cursos y profesores, organizada en proyectos de dominio, aplicación,
+infraestructura y presentación.
 
-## Requirements
+## Requisitos
 
-- .NET 10 SDK
-- Docker Desktop or Docker Engine
+- SDK de .NET 10
+- Docker Desktop o Docker Engine
 
-## Start SQL Server
+## Iniciar SQL Server
 
-Create and start a SQL Server 2022 container with a persistent data volume:
+Crea e inicia un contenedor de SQL Server 2022 con un volumen persistente para
+los datos:
 
 ```bash
 docker run \
@@ -26,10 +27,12 @@ docker run \
   mcr.microsoft.com/mssql/server:2022-latest
 ```
 
-Replace `YourStrong!Passw0rd` with your own strong password (SQL Server
-requires a strong `sa` password). The `--platform linux/amd64` option also
-allows the SQL Server image to run on Apple Silicon using Docker's emulation.
-Wait for SQL Server to become ready:
+Reemplaza `YourStrong!Passw0rd` por una contraseña segura propia (SQL Server
+requiere una contraseña segura para el usuario `sa`). La opción
+`--platform linux/amd64` también permite ejecutar la imagen de SQL Server en
+equipos Apple Silicon mediante la emulación de Docker.
+
+Espera a que SQL Server esté listo:
 
 ```bash
 until docker exec mdw-sqlserver \
@@ -40,8 +43,8 @@ until docker exec mdw-sqlserver \
 done
 ```
 
-The application does not create the database schema automatically. Create the
-database and tables expected by Entity Framework Core:
+La aplicación no crea automáticamente el esquema de la base de datos. Crea la
+base y las tablas que espera Entity Framework Core:
 
 ```bash
 docker exec -i mdw-sqlserver \
@@ -67,10 +70,10 @@ GO
 SQL
 ```
 
-## Build and run the API
+## Compilar e iniciar la API
 
-From the repository root, configure the connection string using .NET User
-Secrets. Use the same password set when starting SQL Server:
+Desde la raíz del repositorio, configura la cadena de conexión con User Secrets
+de .NET. Usa la misma contraseña que configuraste al iniciar SQL Server:
 
 ```bash
 dotnet user-secrets set "ConnectionStrings:Default" \
@@ -81,29 +84,30 @@ dotnet build MDW-Clase2.sln
 dotnet run --project Clase3.Presentation
 ```
 
-The API listens at the URL printed by `dotnet run` (by default,
-`http://localhost:5126`). In Development, the OpenAPI document is available at
-`http://localhost:5126/openapi/v1.json`.
+La API estará disponible en la URL que muestre `dotnet run` (por defecto,
+`http://localhost:5126`). En el entorno Development, el documento OpenAPI está
+disponible en `http://localhost:5126/openapi/v1.json`.
 
-To stop and restart the database container:
+Para detener y volver a iniciar el contenedor de la base de datos:
 
 ```bash
 docker stop mdw-sqlserver
 docker start mdw-sqlserver
 ```
 
-The database data remains in the `mdw-sqlserver-data` Docker volume.
+Los datos de la base se conservan en el volumen de Docker
+`mdw-sqlserver-data`.
 
-## Projects
+## Proyectos
 
-- `Clase2.Domain` — course and professor entities.
-- `Clase2.Application` — commands, queries, and repository abstractions.
-- `Clase5.Infrastructure` — Entity Framework Core SQL Server context and
-  repositories.
-- `Clase3.Presentation` — ASP.NET Core API controllers.
+- `Clase2.Domain`: entidades de cursos y profesores.
+- `Clase2.Application`: comandos, consultas y abstracciones de repositorios.
+- `Clase5.Infrastructure`: contexto de Entity Framework Core para SQL Server
+  y repositorios.
+- `Clase3.Presentation`: controladores de la API ASP.NET Core.
 
-## API routes
+## Rutas de la API
 
-- `api/cursos` — create courses; retrieve, update, or delete a course by ID.
-- `api/profesores` — create professors; retrieve, update, or delete a professor
-  by ID.
+- `api/cursos`: crear cursos; consultar, actualizar o eliminar un curso por ID.
+- `api/profesores`: crear profesores; consultar, actualizar o eliminar un
+  profesor por ID.
