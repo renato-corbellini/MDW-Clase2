@@ -85,8 +85,13 @@ dotnet run --project Clase3.Presentation
 ```
 
 La API estará disponible en la URL que muestre `dotnet run` (por defecto,
-`http://localhost:5126`). En el entorno Development, el documento OpenAPI está
-disponible en `http://localhost:5126/openapi/v1.json`.
+`http://localhost:5126`). En el entorno Development, puedes consultar la
+especificación OpenAPI en `http://localhost:5126/openapi/v1.json` (o en
+`https://localhost:7038/openapi/v1.json` si usas el perfil HTTPS).
+
+El proyecto no tiene configurada la interfaz gráfica de Swagger UI, por lo que
+la ruta `/swagger` no está disponible. La documentación se ofrece como un
+archivo JSON OpenAPI.
 
 Para detener y volver a iniciar el contenedor de la base de datos:
 
