@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="NameRequired" xml:space="preserve">
+    <value>El nombre del curso es obligatorio.</value>
+  </data>
+  <data name="InvalidCredits" xml:space="preserve">
+    <value>Los créditos deben estar entre 1 y 12.</value>
+  </data>
+</root>

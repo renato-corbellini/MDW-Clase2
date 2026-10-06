@@ -1,8 +1,11 @@
 using Clase2.Application;
+using Clase3.Presentation.Middlewares;
 using Clase5.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration); 
 
@@ -12,6 +15,7 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+app.UseExceptionHandler();
 app.MapControllers();
 
 // Configure the HTTP request pipeline.
